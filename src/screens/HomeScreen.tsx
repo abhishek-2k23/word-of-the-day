@@ -1,12 +1,12 @@
 import {View, Text, TouchableOpacity} from 'react-native';
-import React, {useContext, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {StyleSheet} from 'react-native';
-import {AppContext} from '../context/AppContext';
 import useWord from '../hooks/useWord';
+import WordContainer from '../components/WordContainer';
+
 const HomeScreen = () => {
   const navigation = useNavigation();
-  const {word, wordDefinition, loading} = useContext(AppContext);
   const {fetchRandomWord} = useWord();
 
   useEffect(() => {
@@ -15,22 +15,21 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('History' as never)}
-        style={styles.history}>
-        <Text style={styles.historyText}>History</Text>
-      </TouchableOpacity>
-      {
-        loading ? <View><Text> Loading </Text></View> : <View> 
-        <Text>{word}</Text>
-        <Text>{wordDefinition}</Text> </View>
-      }
-      <TouchableOpacity
-        onPress={fetchRandomWord}
-        style={styles.getNewWord}>
-        <Text style={styles.historyText}>Get new word</Text>
-      </TouchableOpacity>
+      <View style={styles.header}>
+        <Text style={styles.title}>Word of the Day</Text>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('History' as never)}
+          style={styles.historyButton}>
+          <Text style={styles.historyText}>History</Text>
+        </TouchableOpacity>
+      </View>
 
+      {/* word with definition  */}
+      <WordContainer />
+
+      <TouchableOpacity onPress={fetchRandomWord} style={styles.getNewWordButton}>
+        <Text style={styles.buttonText}>Get New Word</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -40,40 +39,53 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 10,
-    paddingHorizontal: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: '#f5f5f5',
+    paddingHorizontal: 20,
+    paddingVertical: 10
   },
-  history: {
-    width: 100,
-    height: 40,
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: '#1a1a1a',
+  header: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    position: 'absolute',
-    top: 10,
-    right: 10,
+    marginBottom: 30,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#1a1a1a',
+    letterSpacing: 0.5,
+  },
+  historyButton: {
+    backgroundColor: '#1a1a1a',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 25,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
   historyText: {
-    fontSize: 20,
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
   },
-  input: {
-    width: 200,
-    height: 20,
-    borderColor: '#1a1a1a',
+  getNewWordButton: {
+    backgroundColor: '#1a1a1a',
+    paddingVertical: 15,
+    borderRadius: 25,
+    marginTop: 20,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
-  getNewWord: {
-    width: 140,
-    height: 40,
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: '#1a1a1a',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: '600',
+    textAlign: 'center',
+  },
 });
