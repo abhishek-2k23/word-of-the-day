@@ -1,97 +1,127 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
-# Getting Started
+# Word of the Day
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+A React Native mobile application that helps users learn new words daily. The app fetches random words and their definitions, allowing users to expand their vocabulary while maintaining a history of previously viewed words.
 
-## Step 1: Start Metro
+## Features
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+- 🎯 Daily random word generation
+- 📖 Detailed word definitions
+- 📚 Word history tracking
+- 💾 Persistent storage of word history
+- 🎨 Clean and intuitive user interface
+- 🔄 Easy word refresh functionality
+- 🌓 Dark and Light theme support
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+## Screenshots
 
-```sh
-# Using npm
-npm start
+| Home Screen | Loading Screen |
+|-------------|----------------|
+| ![Home Screen](screenshots/HomeScreen.png) | ![Loading Screen](screenshots/LoadingScreen.png) |
 
-# OR using Yarn
-yarn start
+| New Word | History Screen |
+|----------|----------------|
+| ![New Word](screenshots/NewWord.png) | ![History Screen](screenshots/HistoryScreen.png) |
+
+## Tech Stack
+
+- React Native
+- TypeScript
+- React Navigation
+- AsyncStorage for data persistence
+- Dictionary API for word definitions
+- Random Word API for word generation
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/wordoftheday.git
+cd wordoftheday
 ```
 
-## Step 2: Build and run your app
+2. Install dependencies:
+```bash
+npm install
+```
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+3. Install iOS dependencies (for iOS development):
+```bash
+cd ios
+pod install
+cd ..
+```
 
-### Android
+## Running the App
 
-```sh
-# Using npm
+### For Android:
+```bash
 npm run android
-
-# OR using Yarn
-yarn android
 ```
 
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+### For iOS:
+```bash
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+## Project Structure
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+```
+src/
+├── components/
+│   ├── DefinitionList.tsx    # Component for displaying word definitions
+│   └── WordContainer.tsx     # Container for word and definition display
+├── context/
+│   ├── AppContext.tsx        # Main application context
+│   └── HistoryContext.tsx    # History management context
+├── hooks/
+│   └── useWord.ts           # Custom hook for word management
+├── screens/
+│   ├── HomeScreen.tsx       # Main screen with word display
+│   └── HistoryScreen.tsx    # Screen for viewing word history
+└── types/
+    └── index.ts             # TypeScript type definitions
+```
 
-## Step 3: Modify your app
+## API Integration
 
-Now that you have successfully run the app, let's make changes!
+The app uses two main APIs:
+- Random Word API: `https://random-word-api.herokuapp.com/word`
+- Dictionary API: `https://api.dictionaryapi.dev/api/v2/entries/en/`
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+## Features in Detail
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+### Word Generation
+- Fetches random words from the Random Word API
+- Retrieves detailed definitions from the Dictionary API
+- Displays multiple definitions when available
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+### History Management
+- Saves viewed words and their definitions
+- Persists data using AsyncStorage
+- Allows users to review previously viewed words
 
-## Congratulations! :tada:
+### User Interface
+- Clean and modern design
+- Easy navigation between screens
+- Loading indicators for better UX
+- Responsive layout for different screen sizes
+- Dark and Light theme support with smooth transitions
 
-You've successfully run and modified your React Native App. :partying_face:
+## Contributing
 
-### Now what?
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+## License
 
-# Troubleshooting
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+## Acknowledgments
 
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- Random Word API for providing random words
+- Dictionary API for comprehensive word definitions
+- React Native community for the amazing framework
