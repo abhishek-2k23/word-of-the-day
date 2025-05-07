@@ -1,10 +1,10 @@
-import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
-import React, { useContext } from 'react';
-import { AppContext } from '../context/AppContext';
+import {View, Text, ActivityIndicator, StyleSheet} from 'react-native';
+import React, {useContext} from 'react';
+import {AppContext} from '../context/AppContext';
 import DefinitionList from './DefinitionList';
 
 const WordContainer = () => {
-  const {loading, word, wordDefinition} = useContext(AppContext);
+  const {loading, word, wordDefinition, example} = useContext(AppContext);
   return (
     <View style={styles.contentContainer}>
       {loading || !(word && wordDefinition) ? (
@@ -16,8 +16,12 @@ const WordContainer = () => {
         <View style={styles.wordContainer}>
           <Text style={styles.word}>{word}</Text>
           <View style={styles.definitionContainer}>
-            <Text style={styles.definitionLabel}>Definition:</Text>
+            <Text style={styles.Label}>Definition:</Text>
             <DefinitionList definition={wordDefinition} />
+          </View>
+          <View style={styles.definitionContainer}>
+            <Text style={styles.Label}>Example:</Text>
+            <Text style={styles.example}> {example?.split(',')[0]}</Text>
           </View>
         </View>
       )}
@@ -64,10 +68,14 @@ const styles = StyleSheet.create({
   definitionContainer: {
     width: '100%',
   },
-  definitionLabel: {
+  Label: {
     fontSize: 18,
     color: '#444',
-    marginBottom: 10,
+    marginBottom: 8,
     fontWeight: '600',
+  },
+  example: {
+    fontSize: 16,
+    color: '#444',
   },
 });

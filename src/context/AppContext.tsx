@@ -10,6 +10,8 @@ interface AppContextType {
   setError: (error: string | null) => void;
   wordDefinition: string | null;
   setWordDefinition: (wordDefinition: string | null) => void;
+  example: string | null;
+  setExample: (example: string | null) => void;
 }
 
 // Define the props for our provider component
@@ -27,6 +29,8 @@ export const AppContext = createContext<AppContextType>({
   setError: () => {},
   loading: false,
   setLoading: () => {},
+  example: null,
+  setExample: () => {},
 });
 
 // Create the provider component
@@ -35,6 +39,7 @@ export const AppContextProvider = ({children}: AppContextProviderProps) => {
   const [wordDefinition, setWordDefinition] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [example, setExample] = useState<string | null>(null);
 
   const value = {
     word,
@@ -45,6 +50,8 @@ export const AppContextProvider = ({children}: AppContextProviderProps) => {
     setWordDefinition,
     loading,
     setLoading,
+    example,
+    setExample,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

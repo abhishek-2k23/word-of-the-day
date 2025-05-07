@@ -6,7 +6,7 @@ interface DefinitionListProps {
 }
 
 function DefinitionList({definition}: DefinitionListProps) {
-  const definitionsArray = definition.split(',');
+  const definitionsArray = definition.split(',').slice(0, 5); // Limit to maximum 5 definitions
 
   return (
     <View style={styles.container}>
@@ -14,7 +14,7 @@ function DefinitionList({definition}: DefinitionListProps) {
         data={definitionsArray}
         keyExtractor={item => item}
         showsVerticalScrollIndicator={false}
-        scrollEnabled={false}
+        initialNumToRender={3}
         renderItem={({item, index}) => (
           <View style={styles.definitionContainer}>
             {definitionsArray.length > 1 && (
