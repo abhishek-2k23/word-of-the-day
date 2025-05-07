@@ -1,8 +1,19 @@
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
+import { HistoryContext } from "../context/HistoryContext";
 
 const useWord = () => {
     const { setWord, setError, setWordDefinition, setLoading } = useContext(AppContext);
+    const { history, setHistory } = useContext(HistoryContext);
+
+    const addToHistory = (word: string, definition: string) => {
+        setHistory(prevHistory => {
+            // Remove any existing entry with the same word
+            const filteredHistory = prevHistory.filter(item => item.word !== word);
+            // Add new entry at the beginning
+            return [{ word, definition }, ...filteredHistory];
+        });
+    };
 
     const fetchRandomWord = async () => {
         try {
@@ -22,17 +33,20 @@ const useWord = () => {
                 }
 
                 const definitions = definition[0].meanings[0].definitions.map((d: { definition: string }) => d.definition);
-                setWordDefinition(definitions.join(', '));
+                const definitionText = definitions.join(', ');
+                setWordDefinition(definitionText);
                 setWord(random_word[0]);
+                // Add to history after setting the word and definition
+                addToHistory(random_word[0], definitionText);
             }
         } catch (error) {
             setError(error instanceof Error ? error.message : 'An error occurred');
-        }finally{
+        } finally {
             setLoading(false);
         }
     }
 
-    return { fetchRandomWord };
+    return { fetchRandomWord, history };
 }
 
 export default useWord;
