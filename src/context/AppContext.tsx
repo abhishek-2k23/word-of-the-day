@@ -1,9 +1,9 @@
-import { createContext, ReactNode, useState } from 'react';
+import {createContext, ReactNode, useState} from 'react';
 
 // Define the shape of our context
 interface AppContextType {
-    loading: boolean,
-    setLoading: (loading: boolean) => void;
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
   word: string | null;
   setWord: (word: string | null) => void;
   error: string | null;
@@ -30,7 +30,7 @@ export const AppContext = createContext<AppContextType>({
 });
 
 // Create the provider component
-export const AppContextProvider = ({ children }: AppContextProviderProps) => {
+export const AppContextProvider = ({children}: AppContextProviderProps) => {
   const [word, setWord] = useState<string | null>(null);
   const [wordDefinition, setWordDefinition] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -47,13 +47,7 @@ export const AppContextProvider = ({ children }: AppContextProviderProps) => {
     setLoading,
   };
 
-  return (
-    <AppContext.Provider value={value}>
-      {children}
-    </AppContext.Provider>
-  );
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
 export default AppContextProvider;
-
-

@@ -4,17 +4,20 @@ import React from 'react';
 import HomeScreen from './screens/HomeScreen';
 import HistoryScreen from './screens/HistoryScreen';
 import { AppContextProvider } from './context/AppContext';
+import HistoryContextProvider from './context/HistoryContext';
 
 function App(): React.JSX.Element {
   const Stack = createNativeStackNavigator();
   return (
     <AppContextProvider>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>
-          <Stack.Screen name="History" component={HistoryScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <HistoryContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>
+            <Stack.Screen name="History" component={HistoryScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </HistoryContextProvider>
     </AppContextProvider>
   );
 }
