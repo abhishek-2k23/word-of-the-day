@@ -1,4 +1,4 @@
-import {ReactNode, createContext, useState} from "react";
+import {ReactNode, createContext, useState} from 'react';
 
 interface History {
     word: string,
@@ -12,11 +12,11 @@ interface HistoryContextType {
 
 export const HistoryContext = createContext<HistoryContextType>({
     history: [],
-    setHistory: () => {}
-})
+    setHistory: () => {},
+});
 
 interface IHistoryContextProvider {
-    children: ReactNode
+    children: ReactNode;
 }
 
 const HistoryContextProvider = ({children}: IHistoryContextProvider) => {
@@ -24,10 +24,10 @@ const HistoryContextProvider = ({children}: IHistoryContextProvider) => {
 
     const value = {
         history,
-        setHistory
-    }
+        setHistory,
+    };
 
-    return <HistoryContext.Provider value={value}>{children}</HistoryContext.Provider>
-}
+    return <HistoryContext.Provider value={value}>{children}</HistoryContext.Provider>;
+};
 
 export default HistoryContextProvider;
