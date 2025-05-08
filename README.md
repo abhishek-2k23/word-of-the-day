@@ -1,4 +1,3 @@
-
 # Word of the Day
 
 A React Native mobile application that helps users learn new words daily. The app fetches random words and their definitions, allowing users to expand their vocabulary while maintaining a history of previously viewed words.
@@ -11,17 +10,27 @@ A React Native mobile application that helps users learn new words daily. The ap
 - 💾 Persistent storage of word history
 - 🎨 Clean and intuitive user interface
 - 🔄 Easy word refresh functionality
-- 🌓 Dark and Light theme support
+
+## Download APK
+
+You can download the latest APK from the following link:
+[Download APK](https://drive.google.com/file/d/11ZvS54VlFFVvVngF9Rn53QUwcI5gQ93j/view?usp=drive_link)
+
+To install the APK:
+1. Download the APK file
+2. Enable "Install from Unknown Sources" in your Android settings
+3. Open the downloaded APK file
+4. Follow the installation prompts
 
 ## Screenshots
 
 | Home Screen | Loading Screen |
 |-------------|----------------|
-| ![Home Screen](screenshots/HomeScreen.png) | ![Loading Screen](screenshots/LoadingScreen.png) |
+| ![Home Screen](screenshots/HomeScreen.jpg) | ![Loading Screen](screenshots/LoadingScreen.jpg) |
 
 | New Word | History Screen |
 |----------|----------------|
-| ![New Word](screenshots/NewWord.png) | ![History Screen](screenshots/HistoryScreen.png) |
+| ![New Word](screenshots/NewWord.jpg) | ![History Screen](screenshots/HistoryScreen.jpg) |
 
 ## Tech Stack
 
@@ -36,7 +45,7 @@ A React Native mobile application that helps users learn new words daily. The ap
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/wordoftheday.git
+git clone https://github.com/abhishek-2k23/word-of-the-day
 cd wordoftheday
 ```
 
@@ -69,7 +78,7 @@ npm run ios
 ```
 src/
 ├── components/
-│   ├── DefinitionList.tsx    # Component for displaying word definitions
+│   ├── ShowList.tsx    # Component for displaying word definitions
 │   └── WordContainer.tsx     # Container for word and definition display
 ├── context/
 │   ├── AppContext.tsx        # Main application context
@@ -79,8 +88,8 @@ src/
 ├── screens/
 │   ├── HomeScreen.tsx       # Main screen with word display
 │   └── HistoryScreen.tsx    # Screen for viewing word history
-└── types/
-    └── index.ts             # TypeScript type definitions
+├── asset/                   # App assets and images
+└── App.tsx                 # Root component
 ```
 
 ## API Integration
@@ -95,6 +104,7 @@ The app uses two main APIs:
 - Fetches random words from the Random Word API
 - Retrieves detailed definitions from the Dictionary API
 - Displays multiple definitions when available
+- Shows examples
 
 ### History Management
 - Saves viewed words and their definitions
@@ -106,7 +116,14 @@ The app uses two main APIs:
 - Easy navigation between screens
 - Loading indicators for better UX
 - Responsive layout for different screen sizes
-- Dark and Light theme support with smooth transitions
+- Material Design components
+
+## Testing
+
+To run the test suite:
+```bash
+npm test
+```
 
 ## Contributing
 
@@ -125,3 +142,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Random Word API for providing random words
 - Dictionary API for comprehensive word definitions
 - React Native community for the amazing framework
+- React Native Paper for UI components
