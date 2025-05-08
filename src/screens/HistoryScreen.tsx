@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   View,
   Text,
@@ -6,10 +6,17 @@ import {
   FlatList,
 } from 'react-native';
 import useWord from '../hooks/useWord';
-import DefinitionList from '../components/DefinitionList';
+import { HistoryContext } from '../context/HistoryContext';
+import ShowList from '../components/ShowList';
 
 const HistoryScreen = () => {
-  const {history} = useWord();
+  const {history} = useContext(HistoryContext);
+  const {loadHistory} = useWord();
+
+  //load history from async storage when component mounts
+  useEffect(() => {
+    loadHistory();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -22,7 +29,7 @@ const HistoryScreen = () => {
           renderItem={({item, index}) => (
             <View key={index} style={styles.historyItem}>
               <Text style={styles.word}>{item.word}</Text>
-              <DefinitionList definition={item.definition}/>
+              <ShowList data={item.definition} />
             </View>
           )}
         />
@@ -59,11 +66,38 @@ const styles = StyleSheet.create({
     color: '#666',
     lineHeight: 24,
   },
+  definitionContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    paddingVertical: 4,
+  },
+  indexText: {
+    color: '#666',
+    fontSize: 16,
+    fontWeight: '600',
+    marginRight: 1,
+    minWidth: 24,
+  },
+  definitionText: {
+    flex: 1,
+    fontSize: 16,
+    color: '#333',
+    lineHeight: 24,
+  },
+  separator: {
+    height: 1,
+    backgroundColor: '#eee',
+  },
   emptyText: {
     fontSize: 16,
     color: '#666',
     textAlign: 'center',
     marginTop: 32,
+  },
+  errorText: {
+    fontSize: 14,
+    color: '#ff6b6b',
+    fontStyle: 'italic',
   },
 });
 

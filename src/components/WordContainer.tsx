@@ -1,13 +1,13 @@
 import {View, Text, ActivityIndicator, StyleSheet} from 'react-native';
 import React, {useContext} from 'react';
 import {AppContext} from '../context/AppContext';
-import DefinitionList from './DefinitionList';
+import ShowList from './ShowList';
 
 const WordContainer = () => {
   const {loading, word, wordDefinition, example} = useContext(AppContext);
   return (
     <View style={styles.contentContainer}>
-      {loading || !(word && wordDefinition) ? (
+      {loading || !(word && wordDefinition && example) ? (
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color="#1a1a1a" />
           <Text style={styles.loadingText}>Loading word...</Text>
@@ -17,11 +17,11 @@ const WordContainer = () => {
           <Text style={styles.word}>{word}</Text>
           <View style={styles.definitionContainer}>
             <Text style={styles.Label}>Definition:</Text>
-            <DefinitionList definition={wordDefinition} />
+            <ShowList data={wordDefinition} />
           </View>
           <View style={styles.definitionContainer}>
             <Text style={styles.Label}>Example:</Text>
-            <Text style={styles.example}> {example?.split(',')[0]}</Text>
+            <ShowList data={example} />
           </View>
         </View>
       )}
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   Label: {
     fontSize: 18,
-    color: '#444',
+    color: '#101',
     marginBottom: 8,
     fontWeight: '600',
   },

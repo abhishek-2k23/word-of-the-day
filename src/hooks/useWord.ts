@@ -1,4 +1,4 @@
-import {useContext, useEffect} from 'react';
+import {useContext} from 'react';
 import {AppContext} from '../context/AppContext';
 import {HistoryContext} from '../context/HistoryContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -8,10 +8,9 @@ const HISTORY_STORAGE_KEY = '@word_history';
 const useWord = () => {
   const {setWord, setError, setWordDefinition, setExample, setLoading} =
     useContext(AppContext);
-  const {history, setHistory} = useContext(HistoryContext);
+  const {setHistory} = useContext(HistoryContext);
 
-  // Load history from AsyncStorage when component mounts
-  useEffect(() => {
+  // Load history
     const loadHistory = async () => {
       try {
         const storedHistory = await AsyncStorage.getItem(HISTORY_STORAGE_KEY);
@@ -22,8 +21,6 @@ const useWord = () => {
         console.error('Error loading history:', error);
       }
     };
-    loadHistory();
-  }, [setHistory]);
 
   const addToHistory = async (word: string, definition: string) => {
     try {
@@ -70,12 +67,12 @@ const useWord = () => {
         const definitions = definition[0].meanings.flatMap((meaning: any) =>
           meaning.definitions.map((d: {definition: string}) => d.definition),
         );
-        
+
         // Get all examples from all meanings
         const examples = definition[0].meanings.flatMap((meaning: any) =>
           meaning.definitions
             .map((d: {example: string | undefined}) => d.example)
-            .filter((example: string | undefined): example is string => 
+            .filter((example: string | undefined): example is string =>
               example !== undefined && example !== null
             )
         );
@@ -89,7 +86,7 @@ const useWord = () => {
         const exampleText = examples.join(', ');
         const definitionText = definitions.join(', ');
         console.log(random_word[0], 'e: ', exampleText, 'd: ', definitionText);
-        
+
         setWord(random_word[0]);
         setWordDefinition(definitionText);
         setExample(exampleText);
@@ -104,7 +101,7 @@ const useWord = () => {
     }
   };
 
-  return {fetchRandomWord, history};
+  return {fetchRandomWord, loadHistory};
 };
 
 export default useWord;
