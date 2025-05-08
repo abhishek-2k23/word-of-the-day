@@ -1,10 +1,9 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, Image} from 'react-native';
 import React, {useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {StyleSheet} from 'react-native';
 import useWord from '../hooks/useWord';
 import WordContainer from '../components/WordContainer';
-
 const HomeScreen = () => {
   const navigation = useNavigation();
   const {fetchRandomWord} = useWord();
@@ -16,7 +15,7 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>Word of the Day</Text>
+        <Image source={require('../asset/logo.png')} style={styles.logo}/>
         <TouchableOpacity
           onPress={() => navigation.navigate('History' as never)}
           style={styles.historyButton}>
@@ -41,19 +40,17 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f5f5f5',
     paddingHorizontal: 20,
-    paddingVertical: 10
+    paddingBottom: 20,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 30,
+    marginBottom: 20,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#1a1a1a',
-    letterSpacing: 0.5,
+  logo: {
+    width: 80,
+    height: 80,
   },
   historyButton: {
     backgroundColor: '#1a1a1a',
