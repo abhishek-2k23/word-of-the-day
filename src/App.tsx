@@ -1,6 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
+import { StatusBar } from 'react-native';
 import HomeScreen from './screens/HomeScreen';
 import HistoryScreen from './screens/HistoryScreen';
 import { AppContextProvider } from './context/AppContext';
@@ -11,6 +12,7 @@ function App(): React.JSX.Element {
   return (
     <AppContextProvider>
       <HistoryContextProvider>
+        <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent />
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Home">
             <Stack.Screen name="Home" component={HomeScreen} options={{headerShown: false}}/>

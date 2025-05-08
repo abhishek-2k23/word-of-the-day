@@ -4,6 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 import {StyleSheet} from 'react-native';
 import useWord from '../hooks/useWord';
 import WordContainer from '../components/WordContainer';
+import { SafeAreaView } from 'react-native-safe-area-context';
 const HomeScreen = () => {
   const navigation = useNavigation();
   const {fetchRandomWord} = useWord();
@@ -13,7 +14,7 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Image source={require('../asset/logo.png')} style={styles.logo}/>
         <TouchableOpacity
@@ -29,7 +30,7 @@ const HomeScreen = () => {
       <TouchableOpacity onPress={fetchRandomWord} style={styles.getNewWordButton}>
         <Text style={styles.buttonText}>Get New Word</Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: 80,
-    height: 80,
+    height: 60,
   },
   historyButton: {
     backgroundColor: '#1a1a1a',
